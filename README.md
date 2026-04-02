@@ -69,3 +69,89 @@ Objetivo:
 > Permitir que empresas reduzam os custos operacionais e escalar o sistema conforme o próprio negócio.
 
 ---
+
+# MVP (Minimum Viable Product)
+Nesta fase inicial, o foco está na gestão de **fluxo de vendas**, **estoque** e **relatórios de logística** e na integração de API e permitir com que os módulos conversem entre si.
+
+Projeto Base:
+
+<details>
+  <summary>Módulo de Vendas</summary>
+  
+- Emissão de Pedidos/Seriços: Fluxo de criação, edição e fechamento de venda.
+  
+- Status de Venda: Controle de etapas (Ex: Orçamento -> Aprovado -> Faturado -> Cancelado).
+
+- Calculo de Impostos e Descontos: Regras básicas para chegar ao valor líquido e bruto.
+
+</details>
+
+<details>
+<summary>Módulo de Gestão de Estoque</summary>
+  
+- Cadastro de Produtos Detalhado: SKU (identificador único), EAN (código de barras), categoria, unidade de medida (kg, un, m) e preço de custo.
+
+- Movimentação Manual: Entradas (compras/ajustes) e Saídas (vendas/perdas/avarias).
+
+- Controle de Saldo em Tempo Real: Visualização imediata de quanto resta de cada item.
+
+- Alerta de Estoque Mínimo: Notificação quando um produto atinge o nível crítico para evitar ruptura (falta de produto).
+
+</details>
+
+<details>
+<summary>Módulo de Relatórios de Logística</summary>
+
+- Relatórios de Logística: Relatório geral de vendas, transportes, dados de parceiros, frete, prazos e feedbacks.
+
+- Gestão de Expedição: Um fluxo simples para confirmar que os itens certos foram retirados do estoque e embalados.
+
+- Cadastro de Transportadoras: Registro de parceiros logísticos, tipos de frete (FOB/CIF) e prazos médios.
+
+- Código de Rastreio: Campo para anexar o link/código de rastreamento de terceiros (Correios, Jadlog, etc.) ao pedido.
+
+- Cálculo de Frete Básico: Tabela simples de preços por região ou integração com uma API de cálculo de frete.
+  
+</details>
+
+# Adicionais
+Adições futuras e desejáveis para o projeto.
+
+<details>
+  <summary>Integração com WhatsApp Business</summary>
+  
+  <details>  
+  <summary>Notificações Transacionais Automatizadas:</summary>
+
+  - Vendas: Envio do PDF do orçamento ou confirmação de pedido.
+  
+  - Financeiro: Envio de lembretes de vencimento e boletos/Pix copia-e-cola.
+
+  - Logística: Atualização automática do status de rastreamento ("Seu pedido saiu para entrega!").
+
+  - Templates Oficiais (HSM): Gestão de modelos de mensagens aprovados pela Meta para iniciar conversas.
+
+  - Webhook de Recebimento: Capturar mensagens do cliente e registrar no histórico do CRM.
+  
+  </details>
+
+  <details>
+  <summary>Integração Modular</summary>
+    
+  - O WhatsApp aqui funciona como um Service Consumer de todos os outros módulos:
+
+  - Vendas → WhatsApp: O vendedor clica em "Enviar via Zap" e o módulo de WhatsApp consome a API de Vendas para gerar a mensagem.
+
+  - Logística → WhatsApp: O gatilho de "Objeto Postado" dispara uma mensagem automática sem intervenção humana.
+  
+  </details>
+
+  <details>
+  <summary>Funcionalidades Avançadas</summary>
+    
+  - Chatbot de Autoatendimento: Menu interativo para o cliente consultar status de pedido ou segunda via de boleto sozinho.
+
+  - Multi-agentes: Uma única conta de WhatsApp Business distribuindo conversas para vários vendedores do módulo de Vendas.
+
+  - Interactive Messages: Botões de "Aprovar Orçamento" ou "Confirmar Recebimento" direto no chat, que atualizam o banco de dados do ERP via API.
+</details>
